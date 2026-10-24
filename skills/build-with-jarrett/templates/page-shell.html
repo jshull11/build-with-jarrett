@@ -1,0 +1,298 @@
+<!--
+  BUILD WITH JARRETT · PAGE SHELL
+  ================================
+  Every page the skill makes (Plan, Brand, Design, Storyboard, Build plan, Launch kit,
+  Journey) starts from this file. Copy it, keep the <style> block, and replace the
+  sample content inside <main> with the stage's real content.
+
+  HOW TO USE
+  - Before stage 3 (no brand yet): keep the neutral tokens below.
+  - From stage 3 on: replace the colour tokens (--bg, --surface, --ink, --muted, --line,
+    --accent, --accent-ink) in BOTH the light block and the two dark blocks with the
+    app's palette, and swap the Google Fonts link + --display / --ui for its fonts.
+  - Keep the brand mark (.mark in the footer and in the reel card). Never remove it or
+    make it louder.
+  - Components available: .hero, .section, .chips, .phone, .timeline, .loop, .track,
+    .cols, .swatches, .strip (sideways-scrolling frames), .cardgrid, .reel (9:16 card).
+    Use only the ones the stage needs. Delete the sample content you don't use.
+  - Keep text short. Prefer a diagram, a phone frame or a strip to a paragraph.
+  - As an artifact: publish it as-is (the artifact service adds the document skeleton).
+    As a local file (build-pages/…): add `<!doctype html><meta charset="utf-8">` as the
+    very first line, then open it. Nothing loads from the internet except Google Fonts.
+
+  SAMPLE CONTENT below is a made-up app ("Bloom") so you can see every component.
+  Replace all of it.
+-->
+<title>Bloom Plan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one centred column of visual sections, ending in a 9:16 reel card and the brand mark. */
+:root {
+  /* APP PALETTE (swap from stage 3) */
+  --bg: #F4F5F7;
+  --surface: #FFFFFF;
+  --ink: #111318;
+  --muted: #5F6672;
+  --line: #DCE0E6;
+  --accent: #0F7B6C;
+  --accent-ink: #FFFFFF;      /* text on the accent */
+  --accent-soft: #DDEFEC;
+  /* APP FONTS (swap from stage 3) */
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --ui: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  /* Fixed: the brand mark */
+  --mark-bg: rgba(17, 19, 24, 0.06);
+  --mark-ink: #4A505B;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1013; --surface: #171A1F; --ink: #EEF0F3; --muted: #9AA1AC; --line: #2A2F37;
+    --accent: #3CC2AD; --accent-ink: #06201C; --accent-soft: #123530;
+    --mark-bg: rgba(238, 240, 243, 0.08); --mark-ink: #AEB4BE;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1013; --surface: #171A1F; --ink: #EEF0F3; --muted: #9AA1AC; --line: #2A2F37;
+  --accent: #3CC2AD; --accent-ink: #06201C; --accent-soft: #123530;
+  --mark-bg: rgba(238, 240, 243, 0.08); --mark-ink: #AEB4BE;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--ui); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 920px; margin: 0 auto; display: grid; gap: 72px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; color: var(--ink); }
+h1 { font-size: clamp(40px, 8.5vw, 84px); line-height: .98; letter-spacing: -.03em; font-weight: 800; }
+h2 { font-size: clamp(26px, 4.2vw, 38px); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; }
+h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+p { margin: 0; max-width: 60ch; }
+.label { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+.section { display: grid; gap: 20px; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; min-width: 0; }
+
+/* Hero: the one big line */
+.hero { display: grid; gap: 18px; padding-top: 16px; }
+.hero .kicker { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.hero .lede { font-size: clamp(18px, 2.4vw, 22px); color: var(--muted); max-width: 52ch; }
+.step { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; background: var(--accent); color: var(--accent-ink); padding: 4px 10px; border-radius: 999px; }
+
+/* Chips */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 15px; }
+.chip b { font-weight: 600; }
+
+/* Phone frame (393x852 ratio) */
+.phone { width: 100%; max-width: 260px; aspect-ratio: 393 / 852; border-radius: 36px; background: var(--surface); border: 8px solid var(--ink); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; padding: 26px 14px; text-align: center; container-type: inline-size; }
+.phone::before { content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 34%; height: 18px; background: var(--ink); border-radius: 999px; }
+.phone .big { font-family: var(--display); font-weight: 800; font-size: 11cqw; line-height: 1.05; letter-spacing: -.02em; }
+.phone .btn { margin-top: 3cqw; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 6.2cqw; padding: 4.6cqw 9cqw; border-radius: 999px; }
+.phone .small { font-size: 5.4cqw; color: var(--muted); }
+.phones { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 22px; justify-items: center; }
+.phones figure { margin: 0; display: grid; gap: 10px; justify-items: center; text-align: center; width: 100%; }
+.phones figcaption { font-size: 14px; color: var(--muted); max-width: 26ch; }
+.phones figcaption b { color: var(--ink); display: block; font-weight: 600; }
+
+/* 60-second timeline */
+.timeline { position: relative; padding: 44px 0 8px; }
+.timeline .bar { height: 6px; background: var(--line); border-radius: 999px; position: relative; }
+.timeline .fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 999px; }
+.timeline .pt { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); }
+.timeline .pt.peak { width: 22px; height: 22px; background: var(--accent); }
+.timeline .pt span { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 13px; color: var(--ink); font-weight: 600; }
+.timeline .pt span em { display: block; font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--muted); font-weight: 500; }
+.timeline .ends { display: flex; justify-content: space-between; margin-top: 10px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.tl-wrap { overflow-x: auto; }
+.tl-wrap .timeline { min-width: 560px; margin: 0 40px; }
+
+/* Loop */
+.loop { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; counter-reset: l; }
+.loop div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; position: relative; }
+.loop div::after { content: "→"; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); color: var(--accent); font-weight: 700; }
+.loop div:last-child::after { content: "↺"; }
+.loop b { display: block; font-family: var(--display); font-size: 17px; }
+.loop span { font-size: 14px; color: var(--muted); }
+
+/* Track (stages / milestones) */
+.track { list-style: none; margin: 0; padding: 0; display: grid; border-left: 2px solid var(--line); }
+.track li { padding: 12px 0 12px 22px; position: relative; display: grid; gap: 2px; }
+.track li::before { content: ""; position: absolute; left: -8px; top: 18px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line); }
+.track li.done::before { background: var(--accent); border-color: var(--accent); }
+.track li.now::before { background: var(--surface); border: 3px solid var(--accent); }
+.track b { font-family: var(--display); font-size: 17px; }
+.track span { font-size: 14.5px; color: var(--muted); }
+
+/* Two columns (In v1 / Not yet) */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.cols ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+
+/* Swatches */
+.swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+.sw { border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden; background: var(--surface); }
+.sw i { display: block; height: 90px; }
+.sw div { padding: 10px 12px; font-size: 14px; }
+.sw code { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+/* Strip: sideways-scrolling frames (storyboards). The page never scrolls sideways. */
+.strip { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; }
+.strip > figure { flex: 0 0 200px; margin: 0; scroll-snap-align: start; display: grid; gap: 8px; }
+.strip .clock { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.strip figcaption { font-size: 13.5px; color: var(--muted); }
+.strip figcaption b { color: var(--ink); }
+
+/* Card grid */
+.cardgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+
+/* Reel card: 9:16, finished as a screenshot. Keep key content out of the top 12% and bottom 20%. */
+.reel-wrap { display: grid; justify-items: center; gap: 10px; }
+.reel { width: 100%; max-width: 360px; aspect-ratio: 9 / 16; border-radius: 22px; background: var(--ink); color: var(--bg); position: relative; overflow: hidden; display: grid; grid-template-rows: 12% 1fr 20%; padding: 0 26px; }
+.reel .r-top { align-self: end; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+.reel .r-mid { align-self: center; display: grid; gap: 16px; }
+.reel .r-head { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1.02; letter-spacing: -.02em; }
+.reel .r-hero { background: var(--accent); color: var(--accent-ink); border-radius: 16px; padding: 18px; font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.2; }
+.reel .r-foot { align-self: start; padding-top: 14px; }
+.reel .mark { background: rgba(255,255,255,.12); color: inherit; }
+
+/* Brand mark */
+.mark { display: inline-flex; align-items: center; gap: 8px; background: var(--mark-bg); color: var(--mark-ink); border-radius: 999px; padding: 6px 12px; font-size: 12.5px; font-weight: 500; text-decoration: none; }
+.mark::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .7; }
+footer { max-width: 920px; margin: 72px auto 0; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 18px; justify-content: space-between; align-items: center; font-size: 14px; color: var(--muted); }
+
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  .section { animation: rise .5s ease-out both; }
+  @keyframes rise { from { opacity: .001; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+}
+</style>
+
+<main>
+
+  <!-- HERO: the one sentence -->
+  <header class="hero">
+    <div class="kicker"><span class="step">Step 2 of 10 · Plan</span><span class="label">Bloom (working name)</span></div>
+    <h1>Gratitude in 30 seconds, every morning.</h1>
+    <p class="lede">For busy people who know gratitude helps but never keep a journal.</p>
+    <div class="chips">
+      <span class="chip"><b>Feeling:</b> calmer, more hopeful</span>
+      <span class="chip"><b>For:</b> Maya, 24, always on her phone</span>
+    </div>
+  </header>
+
+  <!-- TIMELINE: the magic moment within 60 seconds -->
+  <section class="section">
+    <span class="label">The magic moment</span>
+    <h2>Her first bloom opens at 0:40</h2>
+    <div class="panel tl-wrap">
+      <div class="timeline">
+        <div class="bar"><div class="fill" style="width:67%"></div>
+          <div class="pt" style="left:0%"><span>Open<em>0:00</em></span></div>
+          <div class="pt" style="left:20%"><span>Pick a time<em>0:12</em></span></div>
+          <div class="pt" style="left:42%"><span>Say one thing<em>0:25</em></span></div>
+          <div class="pt peak" style="left:67%"><span>Bloom opens<em>0:40</em></span></div>
+        </div>
+        <div class="ends"><span>0s</span><span>60s</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOP: the core loop -->
+  <section class="section">
+    <span class="label">The core loop</span>
+    <h2>Why she's back tomorrow</h2>
+    <div class="loop">
+      <div><b>Say one good thing</b><span>Voice or typing, 30 seconds</span></div>
+      <div><b>A flower blooms</b><span>Haptic + soft chime</span></div>
+      <div><b>The garden grows</b><span>One flower a day</span></div>
+      <div><b>8 AM reminder</b><span>Day two</span></div>
+    </div>
+  </section>
+
+  <!-- PHONES: v1 screens -->
+  <section class="section">
+    <span class="label">v1 screens</span>
+    <h2>Four screens, in order</h2>
+    <div class="phones">
+      <figure><div class="phone"><div class="big">Gratitude in 30 seconds.</div><div class="btn">Start</div></div><figcaption><b>Splash</b>The one sentence, one button</figcaption></figure>
+      <figure><div class="phone"><div class="small">When should we remind you?</div><div class="big">8:00 AM</div><div class="btn">Set reminder</div></div><figcaption><b>Reminder</b>Sets up notifications</figcaption></figure>
+      <figure><div class="phone"><div class="big">🌸</div><div class="big">Your first bloom.</div><div class="small">Day 1</div></div><figcaption><b>Magic moment</b>The flower opens</figcaption></figure>
+      <figure><div class="phone"><div class="big">Your garden</div><div class="small">7 flowers this week</div><div class="btn">Share my garden</div></div><figcaption><b>Garden</b>Home for returning users</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- COLS: in v1 / not yet -->
+  <section class="section">
+    <span class="label">Scope</span>
+    <h2>What's in, what waits</h2>
+    <div class="cols">
+      <div class="panel"><h3>In v1</h3><ul><li>Daily prompt, voice or typed</li><li>Bloom animation</li><li>Garden view</li><li>Morning reminder</li></ul></div>
+      <div class="panel"><h3>Not yet</h3><ul class="muted"><li>Friends' gardens</li><li>Themes</li><li>Journal export</li></ul></div>
+    </div>
+  </section>
+
+  <!-- SWATCHES: palette (Brand page) -->
+  <section class="section">
+    <span class="label">Palette</span>
+    <div class="swatches">
+      <div class="sw"><i style="background:#F4F5F7"></i><div>Background<br><code>#F4F5F7</code></div></div>
+      <div class="sw"><i style="background:#111318"></i><div>Ink<br><code>#111318</code></div></div>
+      <div class="sw"><i style="background:#0F7B6C"></i><div>Accent<br><code>#0F7B6C</code></div></div>
+    </div>
+  </section>
+
+  <!-- STRIP: storyboard frames -->
+  <section class="section">
+    <span class="label">Storyboard</span>
+    <h2>First open, frame by frame</h2>
+    <div class="strip">
+      <figure><span class="clock">0:00</span><div class="phone"><div class="big">Gratitude in 30 seconds.</div><div class="btn">Start</div></div><figcaption><b>Taps Start</b> · curious</figcaption></figure>
+      <figure><span class="clock">0:12</span><div class="phone"><div class="big">8:00 AM</div><div class="btn">Set reminder</div></div><figcaption><b>Picks a time</b> · in control</figcaption></figure>
+      <figure><span class="clock">0:25</span><div class="phone"><div class="small">One good thing today?</div><div class="big">🎙️</div></div><figcaption><b>Says one thing</b> · a little shy</figcaption></figure>
+      <figure><span class="clock">0:40</span><div class="phone"><div class="big">🌸</div><div class="big">Your first bloom.</div></div><figcaption><b>Watches it open</b> · delighted</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- TRACK: stages or milestones (Journey / Build plan) -->
+  <section class="section">
+    <span class="label">The journey</span>
+    <ol class="track">
+      <li class="done"><b>Interview</b><span>Done</span></li>
+      <li class="now"><b>Plan</b><span>You are here</span></li>
+      <li><b>Brand</b><span>Next: name, icon, colours</span></li>
+    </ol>
+  </section>
+
+  <!-- REEL CARD: always last -->
+  <section class="section reel-wrap" aria-label="Reel card">
+    <span class="label">Reel card · screenshot or end your recording here</span>
+    <div class="reel">
+      <div class="r-top">Step 2 of 10 · Plan</div>
+      <div class="r-mid">
+        <div class="r-head">My app has a plan.</div>
+        <div class="r-hero">Gratitude in 30 seconds, every morning.</div>
+      </div>
+      <div class="r-foot"><span class="mark">Built with Jarrett · @buildwithjarrett</span></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER: the brand mark, on every page -->
+<footer>
+  <a class="mark" href="https://instagram.com/buildwithjarrett">Built with Jarrett · @buildwithjarrett</a>
+  <span>Questions or stuck? DM @buildwithjarrett on Instagram.</span>
+</footer>

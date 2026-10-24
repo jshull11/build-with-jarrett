@@ -1,0 +1,26 @@
+{
+  "app": {
+    "workingName": null,
+    "oneSentence": null
+  },
+  "currentStage": 0,
+  "stages": [
+    { "n": 0, "name": "Welcome", "status": "pending" },
+    { "n": 1, "name": "Interview", "status": "pending" },
+    { "n": 2, "name": "Plan", "status": "pending", "page": null },
+    { "n": 3, "name": "Brand", "status": "pending", "page": null },
+    { "n": 4, "name": "Design", "status": "pending", "page": null },
+    { "n": 5, "name": "Storyboard", "status": "pending", "page": null },
+    { "n": 6, "name": "Build plan", "status": "pending", "page": null },
+    { "n": 7, "name": "Build", "status": "pending", "milestonesDone": [] },
+    { "n": 8, "name": "Ship", "status": "pending" },
+    { "n": 9, "name": "Launch kit", "status": "pending", "page": null }
+  ],
+  "journeyPage": null,
+  "brand": {
+    "palette": null,
+    "displayFont": null,
+    "uiFont": null
+  },
+  "notes": "status is pending | in_progress | approved. page is an artifact link or a build-pages/ path."
+}

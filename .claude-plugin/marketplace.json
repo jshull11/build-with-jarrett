@@ -1,0 +1,16 @@
+{
+  "name": "build-with-jarrett",
+  "description": "Jarrett's Claude Code plugins for building and launching apps in public.",
+  "owner": {
+    "name": "Jarrett Shull",
+    "url": "https://instagram.com/buildwithjarrett"
+  },
+  "plugins": [
+    {
+      "name": "build-with-jarrett",
+      "source": "./",
+      "description": "Go from an app idea to a high-quality iPhone app, one stage at a time, with a shareable page at every stage.",
+      "version": "1.0.0"
+    }
+  ]
+}

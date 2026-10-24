@@ -1,0 +1,9 @@
+{
+  "name": "build-with-jarrett",
+  "version": "1.0.0",
+  "description": "Build with Jarrett App Builder: go from an app idea to a high-quality iPhone app, one stage at a time, with a shareable page at every stage.",
+  "author": { "name": "Jarrett Shull", "url": "https://instagram.com/buildwithjarrett" },
+  "homepage": "https://buildwithjarrett.beehiiv.com",
+  "repository": "https://github.com/jshull11/build-with-jarrett",
+  "keywords": ["ios", "app", "expo", "onboarding", "build-in-public"]
+}
