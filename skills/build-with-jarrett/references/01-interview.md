@@ -32,8 +32,9 @@ structure, libraries).
 6. **Day two.** Why do they come back tomorrow? A reminder, a streak, something new to
    see, something they can't predict?
 7. **v1 scope.** The 3–6 screens that matter. Everything else goes on the cut list.
-8. **Accounts and data.** Does it need logins, saved data across devices, or AI? (You
-   decide the technology; you only need to know what it must do.)
+8. **Accounts and data.** Every app gets Sign in with Apple (tell them, don't ask). Ask
+   only what it saves to the account and when signing in is worth it to them, and whether
+   it needs AI. (You decide the technology.)
 9. **Money.** Free, a soft paywall (free tier plus paid) or a hard paywall (pay after
    the magic moment)? Weekly, monthly or annual? A rough answer is fine.
 10. **The look.** Three adjectives, one thing it should NOT look like, and two or three

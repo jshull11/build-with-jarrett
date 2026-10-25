@@ -10,12 +10,26 @@ Make these calls yourself and explain each in one plain sentence.
 **App:** Expo (React Native) + Expo Router + TypeScript, with the design-system stack
 from stage 4. Runs on iPhone and Android, testable in Expo Go.
 
-**Backend:** only if the app needs accounts, data saved across devices, sharing between
-users, payments checks or AI calls. Then use **Supabase**:
+**Accounts: every app gets Sign in with Apple.** It's the one sign-in method for every
+Build with Jarrett app: one tap, no password, and Apple's privacy rules are already met.
+- Use `expo-apple-authentication` for the button and native sheet, and Supabase Auth
+  (`signInWithIdToken({ provider: 'apple', token })`) to turn it into a user. Pass a
+  hashed nonce.
+- **Place it after the magic moment**, usually right before or after the paywall, or when
+  the user does something worth saving ("Save your results"). Never before the magic
+  moment. Until then the app works on a device ID, and signing in moves that data onto
+  the account.
+- Ask for name and email only on the first sign-in (Apple sends them once). Store them
+  right away. Honour "Hide My Email".
+- **Account deletion is required** by App Review: a findable "Delete account" in
+  Settings that deletes the user's server data and revokes the Apple token.
+- Don't add Google, email or phone sign-in in v1. Android users get Apple's web flow
+  (or the device-ID mode) until there's a real need.
+- Use Apple's own button (black, white or outlined), never a custom-drawn one.
 
-- **Auth:** Sign in with Apple (required on iOS if you offer other social logins) and
-  Google, or email magic links. Never ask for an account before the magic moment unless
-  the magic moment truly needs one.
+**Backend:** every app has accounts, so every app uses **Supabase**:
+
+- **Auth:** Sign in with Apple, as above. Row-level security uses `auth.uid()`.
 - **Database:** Postgres tables with **row-level security on every table**. Write the
   data model as a short table list (table, key columns, who can read and write it).
 - **Storage:** for photos, audio or files.
@@ -54,7 +68,8 @@ their phone. A typical order:
    splash screen running in Expo Go.
 2. **The magic moment, end to end** (rough is fine): the core feature working.
 3. **Onboarding flow** as storyboarded, with the clock checked.
-4. **Backend and accounts**, if needed.
+4. **Backend and Sign in with Apple:** Supabase project, schema with RLS, the Apple
+   button after the magic moment, device data moved onto the account, and Delete account.
 5. **Main screens** for returning users.
 6. **Sharing** (share card, link, invite).
 7. **Paywall and analytics.**
@@ -73,6 +88,8 @@ From the shell, in the brand:
    functions) → outside services (AI, payments). Plain labels.
 3. The data model as a small table, if there's a backend.
 4. Things the user will need to do, with when: create a Supabase project (milestone 4),
+   turn on the Sign in with Apple capability for the bundle ID and the Apple provider in
+   Supabase Auth (milestone 4),
    Apple Developer account ($99/year, before stage 8), RevenueCat account (milestone 7).
 5. Analytics events as a funnel graphic.
 6. Reel card: "The roadmap", the milestone track.

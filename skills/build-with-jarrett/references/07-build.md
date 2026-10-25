@@ -51,7 +51,21 @@ every changed screen**. Compare with the Design. Fix what the screenshots show.
 Typechecking clean is the start of verified, not the end. When you build something you
 can't see (an animation, a shader, a generated image), build a way to see it.
 
-## Supabase steps (milestone 4, if needed)
+## Sign in with Apple (milestone 4, every app)
+
+1. `npx expo install expo-apple-authentication expo-crypto`, add the plugin and
+   `"ios": { "usesAppleSignIn": true }` to `app.json`.
+2. The user turns on **Sign in with Apple** for the App ID (developer.apple.com →
+   Identifiers) and enables the **Apple** provider in Supabase (Authentication →
+   Providers), adding the bundle ID as the client ID.
+3. Sign in with a hashed nonce through `supabase.auth.signInWithIdToken`. Save the name
+   and email from the first sign-in. Move device-ID data onto the new user.
+4. Build "Delete account" in Settings: an Edge Function that deletes the user's rows and
+   the auth user, and revokes the Apple token.
+5. Test on a real device or a simulator signed in to an Apple ID; Expo Go can't do it,
+   so use a development build.
+
+## Supabase steps (milestone 4, every app)
 
 1. The user creates a project at supabase.com and gives you the project URL and anon
    key. Put them in `.env` as `EXPO_PUBLIC_SUPABASE_URL` and
